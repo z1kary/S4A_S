@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": ">=14 <15"
+  },
   "scripts": {
-    "start": "nodemon server"
+    "start": "node server"
   },
   "author": "",
   "license": "ISC",
