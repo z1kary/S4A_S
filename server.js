@@ -10,15 +10,12 @@ const path = require('path')
 const app = express()
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  'allowedHeaders': ['sessionId', 'Content-Type'],
-  'exposedHeaders': ['sessionId'],
+  "origin": "*",
   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
   'preflightContinue': false
 }
 
-app.use(cors())
+app.use(cors(corsOptions()))
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use(bodyParser.json())
