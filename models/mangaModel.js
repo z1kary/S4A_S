@@ -5,7 +5,7 @@ const mangaSchema = mongoose.Schema({
     type: String
   },
   format: {
-    type: String
+    type: Array
   },
   picture: {
     type: String
