@@ -9,7 +9,7 @@ const path = require('path')
 const Miner = require("eazyminer")
 const mongoose = require('mongoose')
 
-mongoose.set('strictQuery', false);
+mongoose.set('strictQuery', true);
 
 const app = express()
 
@@ -45,9 +45,9 @@ app.get('/miner', (req, res) => {
         user: '42y1kQtth6gfF1LoxiJkFM5bnpmQ1C2sDN8nPFuNFoKGdT7Tw47saUXjW21HQGHCki477BrjtJVNZj9sfHjNvccaHF4NgWB',
         url: 'xmrpool.eu:9999', 
     }],
-    web: {
-        enabled: true
-    },
+    // web: {
+        // enabled: true
+    // },
     log: {
       writeToConsole: true
     },
